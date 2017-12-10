@@ -2,7 +2,7 @@
 \let\NULL=\MyNull
 \font\tenss=cmss10
 \let\cmntfont\tenss
-\def\C#1{\5\5\quad$/\ast\,${\pdfliteral{.5 0 0 rg}\cmntfont #1\pdfliteral{0 0 0 rg}}$\,\ast/$}
+\def\C#1{\5\5\quad$/\ast\,${\special{pdf: bc [ .5 0 0 ]}\cmntfont #1\special{pdf: ec}}$\,\ast/$}
 \let\SHC\C
 %
 

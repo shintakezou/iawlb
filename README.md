@@ -18,10 +18,11 @@ The idea fascinates me, but I think it has several dark corners
 and things I don't like.
 
 - What about huge systems? A simple program took 20 pages and the
-  generated PDF files is 215 kBytes; maybe it can be made smaller
-  using standard PDF fonts (avoiding embedding them?), but it means
-  to tweak CWEB fonts consistently... (It would be easier using LaTeX
-  instead of plainTeX.)
+  generated PDF files is 215 kBytes (with `pdftex`; using `xdvipdfmx`
+  run by `xetex` halved the size); maybe it can be made smaller using
+  standard PDF fonts (avoiding embedding them?), but it means to tweak
+  CWEB fonts consistently... (It would be easier using LaTeX instead
+  of plainTeX.)
 - The output is TeX with format plainTeX. At first I liked it, then
   realized that I became accustomed to LaTeX too much; what about writing
   in Italian, changing input encoding (utf8!), font encoding to use

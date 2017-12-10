@@ -7,8 +7,8 @@ all : $(PROGRAM).pdf
 
 $(PROGRAM).pdf: ../src/$(PROGRAM).w
 	$(CWEAVE) ++ $<
-	pdftex $(PROGRAM).tex && pdftex $(PROGRAM).tex
-	find . -type f ! \( -name Makefile -o -name $@ \) -delete
+	xetex $(PROGRAM).tex && xetex $(PROGRAM).tex
+	find . -type f ! \( -name Makefile -o -name $@ -o -name cwebmac.tex \) -delete
 
 clean :
 	find . -type f ! -name Makefile -delete
