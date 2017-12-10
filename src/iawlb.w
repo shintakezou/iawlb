@@ -455,7 +455,7 @@ void Log(const char *s, ...)
 pthread_mutex_t logmu = PTHREAD_MUTEX_INITIALIZER;
 
 
-@*The synchronized FIFO list. This is a sort of wrap for the STL
+@*The synchronized FIFO list. This is a sort of wrapper for the STL
 |std::list| template class, but with something added to access it
 concurrently and with only a way to put and get data. In fact elements
 are added ``back'' with the |enqueue()| method, while they are popped
@@ -480,7 +480,8 @@ public:@/
     @<Concurrency management@>@;
 };
 
-@ We have to initialize the mutex and the condition.
+@ We have to initialize the mutex and the condition, and
+destroy them when finished.
 
 @<Constructor and destructor@>=    
     SyncedList() {
@@ -607,7 +608,7 @@ last ``flushing''.
 
 The local list (a buffer) must be flushed whichever condition is met
 first: the buffer contains enough sockets so that all the threads
-can work, or a certain amount of time is passed.
+can work, or a certain amount of time has passed.
 
 This is an important change I won't do.
 
