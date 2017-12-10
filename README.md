@@ -17,7 +17,7 @@ Thoughts about literate programming
 The idea fascinates me, but I think it has several dark corners
 and things I don't like.
 
-- What about huge systems? A simple program took 19 pages and the
+- What about huge systems? A simple program took 20 pages and the
   generated PDF files is 215 kBytes; maybe it can be made smaller
   using standard PDF fonts (avoiding embedding them?), but it means
   to tweak CWEB fonts consistently... (It would be easier using LaTeX
@@ -27,7 +27,7 @@ and things I don't like.
   in Italian, changing input encoding (utf8!), font encoding to use
   more “modern” fonts, ... and so on? (I bet there are solutions to this,
   but they aren't already there.)
-- 19 pages or hundreds of pages, it doesn't matter: you don't want
+- 20 pages or hundreds of pages, it doesn't matter: you don't want
   to print them, do you? PDF with links is good, but an easy
   search through the source code could work better in some cases,
   and what about what modern IDEs allow to do?

@@ -28,6 +28,8 @@ charge of pushing data on the list).
 @s pthread_cond_t int
 @s SyncedList make_pair
 @s SyncedList int
+@s ssize_t int
+@s size_t int
 
 
 @ The layout of \.{IAWLB} is very simple.
@@ -264,7 +266,11 @@ SyncedList<int> accepted_sock;
         }
         freeaddrinfo(servinfo);
 
-@ If the thread was able to connect to its destination, then it has both the end of the connection: the accepted socket (from the client calling) |sockcalled|, and the socket for the destination \.{IAWLB}'s worker acts as a client for: from the point of view of the destination, the client is \.{IAWLB}.
+@ If the thread was able to connect to its destination, then it has
+both the ends of the connection: the accepted socket (from the client
+calling) |sockcalled|, and the socket for the destination \.{IAWLB}'s
+worker acts as a client for: from the point of view of the
+destination, the client is \.{IAWLB}.
 
 @<Pipe the data...@>=
         char readbuf[1024*MAX_READ_BUFFER] = "";
@@ -312,7 +318,15 @@ SyncedList<int> accepted_sock;
 
 
 
-@*The server loop. Once \.{IAWLB} is listening to incoming connections, it needs to loop forever pushing the accepted sockets on the synchronized FIFO list |accepted_sock| again and again. This is not intended to be stopped, though of course adding signals handling before entering this loop would be a good thing. Likely we want also to end smoothly, letting the threads to finish their work before killing them all abruptly. These desiderable things aren't here because the purpose of this server isn't to replace a real production-ready load balancer.
+@*The server loop. Once \.{IAWLB} is listening to incoming
+connections, it needs to loop forever pushing the accepted sockets on
+the synchronized FIFO list |accepted_sock| again and again. This is
+not intended to be stopped, though of course adding signals handling
+before entering this loop would be a good thing. Likely we want also
+to end smoothly, letting the threads to finish their work before
+killing them all abruptly. These desiderable things aren't here
+because the purpose of this server isn't to replace a real
+production-ready load balancer.
 
 @<Receiving loop@>=
     FOREVER@+ {
@@ -323,7 +337,8 @@ SyncedList<int> accepted_sock;
             perror("accept");
             continue;
         }
-        char addr_buf[INET6_ADDRSTRLEN]; /* we can deal with IPv6$\ldots{}$ likely$\ldots{}$ |get_in_addr()| tries to deal with part of this. */
+        char addr_buf[INET6_ADDRSTRLEN]; /* we can deal with IPv6$\ldots{}$ likely$\ldots{}$ |get_in_addr()| tries to
+	    deal with part of this when converting from binary to text form. */
         inet_ntop(caller_addr.ss_family,@/@t\qquad@>
                 get_in_addr(static_cast<struct sockaddr*>(&caller_addr)),@/@t\qquad@>
                 addr_buf,@/@t\qquad@>
@@ -375,7 +390,7 @@ We need other functions we've used in the code, and also few defines we have her
 #define MAX_READ_BUFFER 256  /* in kBytes */
 #define ANS_TIMEOUT 31       /* in seconds */
 #define MAX_NUM_OF_DEST_PORT 32
-#define FOREVER for(;;) /* sugar, mainly because I don't like how CWEB formats this expressions,
+#define FOREVER for(;;) /* sugar, mainly because I don't like how CWEB formats this expression,
      and so keeping it in a macro means to see it only here; I will figure out how to typeset
      it better later (or maybe never) */
 
